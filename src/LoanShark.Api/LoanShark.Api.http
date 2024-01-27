@@ -1,6 +1,35 @@
 @LoanShark.Api_HostAddress = http://localhost:5205
+@id = 62a0f005-852c-4a4d-a949-7f7ed1b56c3a
 
-GET {{LoanShark.Api_HostAddress}}/weatherforecast/
+### Get loan
+GET {{LoanShark.Api_HostAddress}}/api/loans/{{id}}
 Accept: application/json
 
-###
+### Get loan summary
+GET {{LoanShark.Api_HostAddress}}/api/loans/{{id}}/summary
+Accept: application/json
+
+### Submit Application
+POST {{LoanShark.Api_HostAddress}}/api/loans
+Content-Type: application/json
+
+{
+  "userId": "{{$random.uuid}}",
+  "amount": 1000
+}
+
+### Approve Application
+POST {{LoanShark.Api_HostAddress}}/api/loans/{{id}}
+Content-Type: application/json
+
+{
+  "approverId": "{{$random.uuid}}"
+}
+
+### Repay loan
+POST {{LoanShark.Api_HostAddress}}/api/loans/{{id}}/repay
+Content-Type: application/json
+
+{
+  "amount": 100
+}
